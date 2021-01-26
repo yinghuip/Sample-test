@@ -22,7 +22,7 @@ export class AutocompleteDisplayExample implements OnInit {
 
   ngOnInit() {
     this.firstSampleHttpCall();
-    this.seoncdSampleHttpCall();
+    this.secondSampleHttpCall();
   }
 
   users: User[] = [];
@@ -37,17 +37,22 @@ export class AutocompleteDisplayExample implements OnInit {
       .get<string[]>("assets/depot.json")
       .subscribe((data: string[]) => (this.depot = data));
   }
-
+  textAreaValue:string = '';
   firstSampleHttpCall() {
     this.sampleServiceService
       .getNumber()
-      .subscribe(result => console.log(result));
+      .subscribe(result => {
+        this.textAreaValue += `\n${result}`
+        });
   }
 
-  seoncdSampleHttpCall() {
+  secondSampleHttpCall() {
     this.sampleServiceService
       .getText()
-      .subscribe(result => console.log(result));
+      .subscribe(result => {
+        console.log(result);
+        this.textAreaValue += `\n${result}`;
+        });
   }
 }
 
